@@ -10,6 +10,9 @@ data <- read.table(text = grep("^[1,2]/2/2007",readLines(files),value=TRUE), sep
 if(!file.exists('figures')) dir.create('figures')
 png(filename = './figures/plot4.png', width = 480, height = 480, units='px')
 
+data$Date <- as.Date(data$Date, format = '%d/%m/%Y')
+data$DateTime <- as.POSIXct(paste(data$Date, data$Time))
+
 Sys.setlocale(category = "LC_ALL", locale = "english")
 par(mfrow = c(2, 2))
 plot(data$DateTime, data$Global_active_power, xlab = '', ylab = 'Global Active Power (kilowatt)', type = 'l')
